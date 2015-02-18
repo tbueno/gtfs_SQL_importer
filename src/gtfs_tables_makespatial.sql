@@ -26,7 +26,7 @@ INSERT INTO gtfs_shape_geoms
 SELECT shape.shape_id, ST_SetSRID(ST_MakeLine(shape.the_geom), 4326) As new_geom
   FROM (
     SELECT shape_id, ST_MakePoint(shape_pt_lon, shape_pt_lat) AS the_geom
-    FROM gtfs_shapes 
+    FROM gtfs_shapes
     ORDER BY shape_id, shape_pt_sequence
   ) AS shape
 GROUP BY shape.shape_id;

@@ -12,9 +12,6 @@ drop table gtfs_frequencies cascade;
 drop table gtfs_transfers cascade;
 drop table gtfs_feed_info cascade;
 
-drop table service_combo_ids cascade;
-drop table service_combinations cascade;
-
 begin;
 
 create table gtfs_agency (
@@ -90,17 +87,6 @@ create table gtfs_calendar_dates (
   service_id     text , --REFERENCES gtfs_calendar(service_id),
   date     date , --NOT NULL,
   exception_type int  --NOT NULL
-);
-
--- The following two tables are not in the spec, but they make dealing with dates and services easier
-create table service_combo_ids
-(
-combination_id serial --primary key
-);
-create table service_combinations
-(
-combination_id int , --references service_combo_ids(combination_id),
-service_id text --references gtfs_calendar(service_id)
 );
 
 create table gtfs_fare_attributes (
@@ -205,7 +191,5 @@ create table gtfs_feed_info (
   feed_start_date text,
   feed_end_date text
 );
-
-
 
 commit;
